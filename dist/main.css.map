@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","mappings":"AAAA;;kHAEW,C","sources":["webpack://just-es6/./src/scss/styles.scss"],"sourcesContent":["*, html {\n  padding: 0;\n  margin: 0;\n}"],"names":[],"sourceRoot":""}
