@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -13,7 +14,10 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.json', '.wasm']
+    extensions: ['.js', '.json', '.wasm'],
+    fallback: {
+      'http': require.resolve('stream-http')
+    }
   },
   module: {
     rules: [
@@ -38,12 +42,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      favicon: './src/images/just-es6-icon.png'
+      template: path.resolve(__dirname, 'src/index.html'),
+      favicon: path.resolve(__dirname, 'src/images/just-es6-icon.png')
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css"
-    })
+    }),
+    new NodePolyfillPlugin()
   ],
   stats: {
     colors: true
